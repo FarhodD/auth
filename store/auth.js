@@ -5,7 +5,6 @@ const api = 'https://077bb05296c26dd1.mokky.dev'
 
 export const useAuthStore = defineStore('auth', {
     state: () => ({
-        token: localStorage.getItem('token') || null,
         user: null,
     }),
     actions: {
@@ -15,8 +14,7 @@ export const useAuthStore = defineStore('auth', {
                     email, password
                 })
 
-                const { token, data } = response
-                this.token = token
+                const { data, token } = response
                 this.user = data
                 localStorage.setItem('token', token)
             } catch (error) {
@@ -36,19 +34,6 @@ export const useAuthStore = defineStore('auth', {
                 console.log(error)
             }
         },
-        // async getUser() {
-        //     if (!this.token) return
-
-        //     try {
-        //         const { data } = await axios.post(`${api}/users`, {
-        //             headers: {
-        //                 Authorization: `Bearer ${this.token}`,
-        //             },
-        //         })
-        //     } catch (error) {
-        //         console.log(error);
-        //     }
-        // },
         logout() {
             this.token = null
             this.user = null

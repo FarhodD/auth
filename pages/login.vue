@@ -1,23 +1,28 @@
 <script setup>
-import { useAuthStore } from '../store/auth.store';
+import { useAuthStore } from '~/store/auth'
+const { login } = useAuthStore()
 
-const { login } = useAuthStore();
-console.log(login);
+const email = ref('')
+const password = ref('')
+
 const onLogin = async () => {
-    const email = 'example@email.com';
-    const password = 'password';
-    await login(email, password);
-};
+    const loginData = {
+        email: email.value,
+        password: password.value
+    }
+    await login(loginData)
+}
 </script>
 
 <template>
     <div class="flex flex-col items-center w-full ">
-        <div class="w-96 p-4 border rounded-lg">
-            <h2 class="text-4xl font-semibold mb-6 text-center text-slate-500">Вход</h2>
-            <form class="flex flex-col gap-4">
-                <input class="border p-2 outline-slate-400 text-lg" placeholder="Email" type="email">
-                <input class="border p-2 outline-slate-400 text-lg" placeholder="Пароль" type="password">
-                <button class="bg-slate-500 py-3 text-white rounded-md text-lg font-semibold">Войти</button>
+        <div class="w-96 p-4 border-2 rounded-lg">
+            <h2 class="text-4xl font-semibold mb-6 text-center text-primaryColor">Вход</h2>
+            <form @submit.prevent="onLogin" class="flex flex-col gap-4">
+                <input class="border-2 p-2 outline-primaryColor text-lg" v-model="email" placeholder="Email" type="email">
+                <input class="border-2 p-2 outline-primaryColor text-lg" v-model="password" placeholder="Пароль"
+                    type="password">
+                <button class="bg-primaryColor py-3 text-white rounded-md text-lg font-semibold">Войти</button>
             </form>
         </div>
     </div>

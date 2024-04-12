@@ -1,7 +1,5 @@
 <template>
     <div>
-        <h1 class="text-2xl">Main Page</h1> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore nesciunt magnam
-        iste beatae accusantium pariatur corporis cum, neque dolor fugit, a nostrum harum exercitationem reprehenderit
-        dolores nulla ipsum explicabo est.
+        <h1 class="text-4xl font-semibold uppercase text-center text-primaryColor">Welcome to main page!</h1>
     </div>
 </template>
