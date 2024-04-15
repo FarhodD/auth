@@ -6,6 +6,7 @@ const api = 'https://077bb05296c26dd1.mokky.dev'
 export const useAuthStore = defineStore('auth', {
     state: () => ({
         user: null,
+        token: null
     }),
     actions: {
         async login(email, password) {
@@ -14,21 +15,23 @@ export const useAuthStore = defineStore('auth', {
                     email, password
                 })
 
-                const { data, token } = response
+                const { data, token } = response.data
                 this.user = data
+                this.token = token
                 localStorage.setItem('token', token)
+                console.log(data);
             } catch (error) {
                 console.log(error)
             }
         },
         async register(name, email, password) {
             try {
-                const response = axios.post(`${api}/register`, {
+                const response = await axios.post(`${api}/register`, {
                     name, email, password
                 })
-                const { token, user } = response.data
+                const { data, token } = response.data
                 this.token = token
-                this.user = user
+                this.user = data
                 localStorage.setItem('token', token)
             } catch (error) {
                 console.log(error)

@@ -1,18 +1,19 @@
-import { useAuthStore } from "~/store/auth"
+import { useAuthStore } from "~/store/auth";
 
 export default defineNuxtRouteMiddleware((to) => {
-    const { token } = storeToRefs(useAuthStore())
+    const { token } = storeToRefs(useAuthStore());
 
-    // if (localStorageToken) {
-    //     token = true
+    // if (token.value) {
+    //     if (to.name === 'login' || to.name === 'register') {
+    //         return navigateTo('/');
+    //     }
     // }
-
-    // if (localStorageToken && to?.name === 'login') {
-        // return navigateTo('/')
+    // else {
+    //     if (to.name === 'login' || to.name === 'register') {
+    //         return;
+    //     } else {
+    //         abortNavigation();
+    //         return navigateTo('/login');
+    //     }
     // }
-
-    // if (!localStorageToken && to?.name !== 'login') {
-    //     abortNavigation()
-    //     return navigateTo('/login')
-    // }
-})
+});
