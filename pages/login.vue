@@ -1,13 +1,16 @@
 <script setup>
-import { useAuthStore } from "~/store/auth";
-const { login } = useAuthStore();
+import { useAuthStore } from "~/store/auth"
 
-const email = ref("");
-const password = ref("");
+const { login } = useAuthStore()
+
+const email = ref("")
+const password = ref("")
 
 const onLogin = async () => {
-  await login(email.value, password.value);
-};
+  await login(email.value, password.value)
+  email.value = ''
+  password.value = ''
+}
 </script>
 
 <template>
@@ -17,21 +20,10 @@ const onLogin = async () => {
         Вход
       </h2>
       <form @submit.prevent="onLogin" class="flex flex-col gap-4">
-        <input
-          class="border-2 p-2 outline-primaryColor text-lg"
-          v-model="email"
-          placeholder="Email"
-          type="email"
-        />
-        <input
-          class="border-2 p-2 outline-primaryColor text-lg"
-          v-model="password"
-          placeholder="Пароль"
-          type="password"
-        />
-        <button
-          class="bg-primaryColor py-3 text-white rounded-md text-lg font-semibold"
-        >
+        <input class="border-2 p-2 outline-primaryColor text-lg" v-model="email" placeholder="Email" type="email" />
+        <input class="border-2 p-2 outline-primaryColor text-lg" v-model="password" placeholder="Пароль"
+          type="password" />
+        <button class="bg-primaryColor py-3 text-white rounded-md text-lg font-semibold">
           Войти
         </button>
       </form>

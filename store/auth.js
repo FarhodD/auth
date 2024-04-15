@@ -1,27 +1,25 @@
 import axios from 'axios'
 import { defineStore } from 'pinia'
+import { useStorage } from '@vueuse/core'
 
 const api = 'https://077bb05296c26dd1.mokky.dev'
 
 export const useAuthStore = defineStore('auth', {
     state: () => ({
         user: null,
-        token: null
     }),
     actions: {
         async login(email, password) {
             try {
                 const response = await axios.post(`${api}/auth`, {
-                    email, password
+                    email, password,
                 })
-
                 const { data, token } = response.data
                 this.user = data
-                this.token = token
-                localStorage.setItem('token', token)
-                console.log(data);
+                useStorage('token', token)
+                useStorage('user', data)
             } catch (error) {
-                console.log(error)
+                alert(`Пользователь не авторизован`)
             }
         },
         async register(name, email, password) {
@@ -30,17 +28,17 @@ export const useAuthStore = defineStore('auth', {
                     name, email, password
                 })
                 const { data, token } = response.data
-                this.token = token
                 this.user = data
-                localStorage.setItem('token', token)
+                useStorage('token', token)
+                useStorage('user', data)
             } catch (error) {
                 console.log(error)
             }
         },
         logout() {
-            this.token = null
             this.user = null
-            localStorage.removeItem('token')
+            useStorage('token').value = null
+            useStorage('user').value = null
         },
     },
 })

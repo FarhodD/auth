@@ -6,6 +6,7 @@ export default defineNuxtConfig({
       pathPrefix: false,
     },
   ],
+  ssr: false,
   modules: [
     '@pinia/nuxt',
   ],
