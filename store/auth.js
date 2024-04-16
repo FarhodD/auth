@@ -7,6 +7,7 @@ const api = 'https://077bb05296c26dd1.mokky.dev'
 export const useAuthStore = defineStore('auth', {
     state: () => ({
         user: null,
+        isAuth: false
     }),
     actions: {
         async login(email, password) {
@@ -16,9 +17,9 @@ export const useAuthStore = defineStore('auth', {
                 })
                 const { data, token } = response.data
                 this.user = data
+                this.isAuth = true
                 useStorage('token', token)
                 useStorage('user', data)
-
             } catch (error) {
                 alert(`Пользователь не авторизован`)
             }
@@ -30,6 +31,7 @@ export const useAuthStore = defineStore('auth', {
                 })
                 const { data, token } = response.data
                 this.user = data
+                this.isAuth = true
                 useStorage('token', token)
                 useStorage('user', data)
             } catch (error) {
@@ -38,6 +40,7 @@ export const useAuthStore = defineStore('auth', {
         },
         logout() {
             this.user = null
+            this.isAuth = false
             useStorage('token').value = null
             useStorage('user').value = null
         },

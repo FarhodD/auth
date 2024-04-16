@@ -9,7 +9,11 @@ const email = ref("");
 const password = ref("");
 
 const onRegister = async () => {
-  await register(name.value, email.value, password.value);
+  if (email.value.trim() && password.value.trim() && name.value.trim()) {
+    await register(name.value, email.value, password.value)
+  } else {
+    alert('Поля email и password объязательны и не должны быть пустыми')
+  }
   name.value = "";
   email.value = "";
   password.value = "";
@@ -24,27 +28,13 @@ const onRegister = async () => {
         Регистрация
       </h2>
       <form @submit.prevent="onRegister" class="flex flex-col gap-4">
-        <input
-          class="border-2 p-2 outline-primaryColor text-lg text-primaryColor placeholder:font-normal font-medium"
-          v-model="name"
-          placeholder="Имя"
-          type="text"
-        />
-        <input
-          class="border-2 p-2 outline-primaryColor text-lg text-primaryColor placeholder:font-normal font-medium"
-          v-model="email"
-          placeholder="Email"
-          type="email"
-        />
-        <input
-          class="border-2 p-2 outline-primaryColor text-lg text-primaryColor placeholder:font-normal font-medium"
-          v-model="password"
-          placeholder="Пароль"
-          type="password"
-        />
-        <button
-          class="bg-primaryColor py-3 text-white rounded-md text-lg font-semibold"
-        >
+        <input class="border-2 p-2 outline-primaryColor text-lg text-primaryColor placeholder:font-normal font-medium"
+          v-model="name" placeholder="Имя" type="text" />
+        <input class="border-2 p-2 outline-primaryColor text-lg text-primaryColor placeholder:font-normal font-medium"
+          v-model="email" placeholder="Email" type="email" />
+        <input class="border-2 p-2 outline-primaryColor text-lg text-primaryColor placeholder:font-normal font-medium"
+          v-model="password" placeholder="Пароль" type="password" />
+        <button class="bg-primaryColor py-3 text-white rounded-md text-lg font-semibold">
           Зарегистрироваться
         </button>
       </form>

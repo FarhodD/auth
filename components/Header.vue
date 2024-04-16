@@ -1,15 +1,17 @@
 <script setup>
-import { useStorage } from '@vueuse/core'
 import { useAuthStore } from '~/store/auth'
-import {useRouter} from 'vue-router' 
+import { useRouter } from 'vue-router'
+import { storeToRefs } from 'pinia'
 
-const isAuth = useStorage('token').value
 const router = useRouter()
+const store = useAuthStore()
+const { logout } = store
+let { isAuth } = storeToRefs(store)
+console.log(isAuth.value);
 
-const onLogout = async () => { 
-  const { logout } = useAuthStore()
-  await logout() 
-  router.push('/login')
+const onLogout = async () => {
+    await logout()
+    router.push('/login')
 }
 </script>
 

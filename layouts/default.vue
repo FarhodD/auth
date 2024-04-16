@@ -1,6 +1,6 @@
 <template>
     <Header />
-    <main class="w-4/5 mx-auto py-20">
+    <main class="flex items-center justify-center min-h-[80vh]">
         <slot />
     </main>
 </template>
