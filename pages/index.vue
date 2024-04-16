@@ -1,7 +1,8 @@
 <script setup>
 import { useStorage } from '@vueuse/core'
 
-const userInfo = JSON.parse(useStorage('user').value)
+const storedUserInfo = useStorage('user').value
+const userInfo = storedUserInfo ? JSON.parse(storedUserInfo) : { name: 'Guest' }
 </script>
 
 <template>

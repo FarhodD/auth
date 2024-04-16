@@ -18,6 +18,7 @@ export const useAuthStore = defineStore('auth', {
                 this.user = data
                 useStorage('token', token)
                 useStorage('user', data)
+
             } catch (error) {
                 alert(`Пользователь не авторизован`)
             }

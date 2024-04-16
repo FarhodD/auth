@@ -1,9 +1,16 @@
 <script setup>
 import { useStorage } from '@vueuse/core'
 import { useAuthStore } from '~/store/auth'
+import {useRouter} from 'vue-router' 
 
 const isAuth = useStorage('token').value
-const { logout } = useAuthStore()
+const router = useRouter()
+
+const onLogout = async () => { 
+  const { logout } = useAuthStore()
+  await logout() 
+  router.push('/login')
+}
 </script>
 
 <template>
@@ -17,7 +24,7 @@ const { logout } = useAuthStore()
                     <NuxtLink to="/login">Вход</NuxtLink>
                 </li>
             </ul>
-            <div v-else @click="logout" class="flex items-center gap-4">
+            <div v-else @click="onLogout" class="flex items-center gap-4">
                 <NuxtLink class="text-white font-medium text-lg" to="/login">
                     Выйти
                 </NuxtLink>
