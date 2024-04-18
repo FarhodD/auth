@@ -1,24 +1,6 @@
 <script setup>
-import { useAuthStore } from "~/store/auth";
-import { useRouter } from "vue-router";
-
-const { register } = useAuthStore();
-const router = useRouter();
-const name = ref("");
-const email = ref("");
-const password = ref("");
-
-const onRegister = async () => {
-  if (email.value.trim() && password.value.trim() && name.value.trim()) {
-    await register(name.value, email.value, password.value)
-  } else {
-    alert('Поля email и password объязательны и не должны быть пустыми')
-  }
-  name.value = "";
-  email.value = "";
-  password.value = "";
-  router.push("/");
-};
+const { name, email, password, onSubmit } = useAuthForm()
+const onRegister = () => onSubmit('register')
 </script>
 
 <template>

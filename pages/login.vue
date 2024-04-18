@@ -1,22 +1,6 @@
 <script setup>
-import { useAuthStore } from "~/store/auth"
-import { useRouter } from 'vue-router'
-
-const { login } = useAuthStore()
-const email = ref("")
-const password = ref("")
-const router = useRouter()
-
-const onLogin = async () => {
-  if (email.value && password.value) {
-    await login(email.value, password.value)
-  } else {
-    alert('Пользователь не авторизован')
-  }
-  email.value = ''
-  password.value = ''
-  router.push('/')
-}
+const { email, password, onSubmit } = useAuthForm()
+const onLogin = () => onSubmit('login')
 </script>
 
 <template>
