@@ -17,7 +17,6 @@ export const useAuthStore = defineStore('auth', {
                 })
                 const { data, token } = response.data
                 this.user = data
-                this.isAuth = true
                 useStorage('token', token)
                 useStorage('user', data)
             } catch (error) {
@@ -31,7 +30,6 @@ export const useAuthStore = defineStore('auth', {
                 })
                 const { data, token } = response.data
                 this.user = data
-                this.isAuth = true
                 useStorage('token', token)
                 useStorage('user', data)
             } catch (error) {
