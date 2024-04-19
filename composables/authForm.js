@@ -1,4 +1,4 @@
-import { useAuthStore } from "~/store/auth";
+import { useAuthStore } from "~/store/auth"
 
 export function useAuthForm() {
     const { login, register } = useAuthStore()
@@ -8,22 +8,27 @@ export function useAuthForm() {
     const name = ref('')
     const password = ref('')
 
+    const clearForm = () => {
+        name.value = ''
+        email.value = ''
+        password.value = ''
+    }
+
     const onSubmit = async (action) => {
         if (email.value.trim() && password.value.trim()) {
             if (action === "login") {
-                await login(email.value, password.value);
+                await login(email.value, password.value)
+                router.push('/')
             } else if (action === "register") {
-                await register(name.value, email.value, password.value);
+                await register(name.value, email.value, password.value)
+                router.push('/')
             } else {
-                console.error("Invalid action provided to useAuthForm");
+                console.error("Invalid action provided to useAuthForm")
             }
         } else {
-            alert("Email and password are required");
+            alert("All fields are required")
         }
-        name.value = '';
-        email.value = '';
-        password.value = '';
-        router.push("/");
+        clearForm()
     }
 
     return { email, password, name, onSubmit }
