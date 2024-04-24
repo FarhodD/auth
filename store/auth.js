@@ -33,7 +33,23 @@ export const useAuthStore = defineStore('auth', {
                 useStorage('token', token)
                 useStorage('user', data)
             } catch (error) {
-                console.log(error)
+                alert('Такой пользователь уже существует')
+            }
+        },
+        async getUsers() {
+            try {
+                const token = useStorage('token').value
+                if (!token) {
+                    alert('Пользователь не авторизован')
+                }
+                const response = await axios.get(`${api}/users`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                })
+                return response.data
+            } catch (error) {
+                console.log(error);
             }
         },
         logout() {
