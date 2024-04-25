@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 import { useStorage } from '@vueuse/core'
 
 const api = 'https://077bb05296c26dd1.mokky.dev'
+const router = useRouter()
 
 export const useAuthStore = defineStore('auth', {
     state: () => ({
@@ -39,15 +40,14 @@ export const useAuthStore = defineStore('auth', {
         async getUsers() {
             try {
                 const token = useStorage('token').value
-                if (!token) {
-                    alert('Пользователь не авторизован')
+                if (token) {
+                    const response = await axios.get(`${api}/users`, {
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                    })
+                    return response.data
                 }
-                const response = await axios.get(`${api}/users`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                })
-                return response.data
             } catch (error) {
                 console.log(error);
             }
