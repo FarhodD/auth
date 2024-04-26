@@ -6,7 +6,6 @@ import { useAuthStore } from '~/store/auth'
 export default defineNuxtRouteMiddleware((to) => {
     let { isAuth } = storeToRefs(useAuthStore())
     const token = useStorage('token').value
-    console.log(isAuth);
     if (token) {
         return isAuth.value = true
     }

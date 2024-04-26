@@ -3,7 +3,6 @@ import { defineStore } from 'pinia'
 import { useStorage } from '@vueuse/core'
 
 const api = 'https://077bb05296c26dd1.mokky.dev'
-const router = useRouter()
 
 export const useAuthStore = defineStore('auth', {
     state: () => ({

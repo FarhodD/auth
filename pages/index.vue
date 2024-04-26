@@ -17,7 +17,7 @@ const showUsers = async () => {
         const userData = await getUsers()
         users.value = userData
     } else {
-        alert('Для того чтобы посмотреть на список пользователей Вам неоюходимо авторизоваться')
+        alert('Для того чтобы посмотреть на список пользователей Вам необходимо авторизоваться')
         await logout()
         router.push('/login')
     }

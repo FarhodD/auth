@@ -7,7 +7,6 @@ const router = useRouter()
 const store = useAuthStore()
 const { logout } = store
 let { isAuth } = storeToRefs(store)
-console.log(isAuth.value);
 
 const onLogout = async () => {
     await logout()
